@@ -5,8 +5,9 @@ function Game(canvasID) {
   this.ctx = this.canvas.getContext("2d");
   this.fps = 60;
   this.bg = new Background(this);
-  this.player1 = new Player(this, './img/marioPrueba.png');
-  this.player2 = new Player(this, './img/luigiPrueba.png');
+  this.player1 = new Player(this, './img/MarioSprite.png');
+  this.player2 = new Player(this, './img/LuigiSprite.png');
+  this.framesCounter=0;
 }
 
 Game.prototype.start = function () {
@@ -15,7 +16,7 @@ Game.prototype.start = function () {
     // this.clear();  
 
     this.framesCounter++;
-
+    
     if (this.framesCounter > 1000) {
       this.framesCounter = 0;
     } 
@@ -53,7 +54,7 @@ Game.prototype.setListeners = function () {
   document.onkeydown = function (event) {
 
     if (event.keyCode === this.player1.runKey1) { //Entrada jugador 1
-
+      this.player1.animateImg();
       console.log(this.player1.x);
       if (this.player1.x > 515 || this.player1.x > this.player2.x) {  // Cuando llega a la mitad de la pantalla
         this.move();
@@ -76,7 +77,7 @@ Game.prototype.setListeners = function () {
     }
 
     if (event.keyCode === this.player2.runKey2) { //Entrada jugador 2
-
+      this.player2.animateImg();
       console.log(this.player2.x);
       console.log(this.bg.x);
       if (this.player2.x > 515 || this.player2.x > this.player1.x) {
