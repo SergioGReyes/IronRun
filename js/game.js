@@ -12,7 +12,14 @@ function Game(canvasID) {
 Game.prototype.start = function () {
 
   this.interval = setInterval(function () {
-    // this.clear();   
+    // this.clear();  
+
+    this.framesCounter++;
+
+    if (this.framesCounter > 1000) {
+      this.framesCounter = 0;
+    } 
+    
     this.draw();
     // this.move();    
     this.setListeners();
@@ -42,7 +49,7 @@ Game.prototype.clear = function () {
 
 
 Game.prototype.setListeners = function () {
-
+  var thrust = 0.25;
   document.onkeydown = function (event) {
 
     if (event.keyCode === this.player1.runKey1) { //Entrada jugador 1
@@ -51,16 +58,20 @@ Game.prototype.setListeners = function () {
       if (this.player1.x > 515 || this.player1.x > this.player2.x) {  // Cuando llega a la mitad de la pantalla
         this.move();
         this.player2.x -= 70;
+        
         if (this.bg.move()) { //si ha llegado al final
           this.player2.x += 70
+          
           if (this.player1.x > 905) { // Cuando cruza la línea de meta
 
           } else {
             this.player1.x += 70;
+            
           }
         }
       } else {
         this.player1.x += 70;
+          
       }
     }
 
@@ -71,16 +82,20 @@ Game.prototype.setListeners = function () {
       if (this.player2.x > 515 || this.player2.x > this.player1.x) {
         this.move();
         this.player1.x -= 70;
+        
         if (this.bg.move()) { // si ha llegado al final
           this.player1.x += 70;
+         
           if (this.player2.x > 905) {
 
           } else {
             this.player2.x += 70;
+           
           }
         }
       } else {
         this.player2.x += 70
+        
       }
     }
 
