@@ -11,11 +11,11 @@ function Background (game){
 
 Background.prototype.draw = function(){
 
-  this.game.ctx.drawImage(this.img, this.x, this.y, 8000, 700);
-  
+  this.game.ctx.drawImage(this.img, this.x, this.y, 8000, 700);  
 }
 
 Background.prototype.move = function(){
-
-  this.x = -40;
+  this.x -= 4;
+  
+  
 }
