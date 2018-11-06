@@ -7,20 +7,23 @@ function Game(canvasID) {
   this.bg = new Background(this);
   this.player1 = new Player(this, './img/MarioSprite.png');
   this.player2 = new Player(this, './img/LuigiSprite.png');
-  this.framesCounter=0;
+  this.framesCounter = 0;
+  this.counter = 10;
+
 }
 
 Game.prototype.start = function () {
 
   this.interval = setInterval(function () {
+    this.counter--
     // this.clear();  
 
     this.framesCounter++;
-    
+
     if (this.framesCounter > 1000) {
       this.framesCounter = 0;
-    } 
-    
+    }
+
     this.draw();
     // this.move();    
     this.setListeners();
@@ -48,63 +51,61 @@ Game.prototype.clear = function () {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }
 
-Game.prototype.audio = function(){
+Game.prototype.audio = function () {
 
   var audioCrowd = new Audio('./audio/Stadium.mp3');
   audioCrowd.play();
 }
 
-
 Game.prototype.setListeners = function () {
   var thrust = 0.25;
-  document.onkeydown = function (event) {
+  document.onkeyup = function (event) {
 
     if (event.keyCode === this.player1.runKey1) { //Entrada jugador 1
       this.player1.animateImg();
-      console.log(this.player1.x);
-      if (this.player1.x > 515 || this.player1.x > this.player2.x) {  // Cuando llega a la mitad de la pantalla
+      // console.log(this.player1.x);
+      if (this.player1.x > 515 || this.player1.x > this.player2.x) {  // Cuando llega a la mitad de la pantalla o esta delante del otro jugador
         this.move();
-        this.player2.x -= 70;
-        
+        // this.player2.x -= 35;
+        this.player2.speedThrust += this.player2.thrust;
+        this.player2.x -= this.player2.speedX + this.player2.speedThrust;
+
         if (this.bg.move()) { //si ha llegado al final
-          this.player2.x += 70
-          
+          this.player2.x += 35
+
           if (this.player1.x > 905) { // Cuando cruza la línea de meta
 
           } else {
-            this.player1.x += 70;
-            
+            this.player1.x += 35;
           }
         }
-      } else {
-        this.player1.x += 70;
-          
+      } else { // al empezar o ir el último
+        this.player1.x += 35;
       }
     }
 
     if (event.keyCode === this.player2.runKey2) { //Entrada jugador 2
       this.player2.animateImg();
-      console.log(this.player2.x);
-      console.log(this.bg.x);
+      // console.log(this.player2.x);
+      // console.log(this.bg.x);
       if (this.player2.x > 515 || this.player2.x > this.player1.x) {
         this.move();
-        this.player1.x -= 70;
-        
+        // this.player1.x -= 35;
+        this.player1.speedThrust += this.player1.thrust;
+        this.player1.x -= this.player1.speedX + this.player1.speedThrust;
+
         if (this.bg.move()) { // si ha llegado al final
-          this.player1.x += 70;
-         
+          this.player1.x += 35;
+
           if (this.player2.x > 905) {
 
           } else {
-            this.player2.x += 70;
-           
+            this.player2.x += 35;
           }
         }
       } else {
-        this.player2.x += 70
-        
+        this.player2.x += 35
       }
     }
-
   }.bind(this);
 };

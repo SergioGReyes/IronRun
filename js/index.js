@@ -1,12 +1,15 @@
 
-window.onload = function() {
-  // var game = new Game("canvasID");
+
+
+window.onload = function () {
+
+  
 
   document.getElementById("start-button").onclick = function () {
+    
     var game = new Game("canvasID");
     game.start();
     game.audio();
-   
-  };
 
+  };
 };
