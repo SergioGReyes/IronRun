@@ -9,7 +9,8 @@ function Game(canvasID) {
   this.player1 = new Player(this, './img/MarioSprite.png');
   this.player2 = new Player(this, './img/LuigiSprite.png');
   this.framesCounter = 0;
-  this.counter = 600;
+  this.counterDown = 600;
+  this.counterUp = 0;
 }
 
 Game.prototype.start = function () {
@@ -25,17 +26,18 @@ Game.prototype.start = function () {
     this.draw();
 
     // console.log(this.counter);
-    if (this.counter / 60 > 0) {
-      this.counter--;
-      console.log(this.counter / 60);
-      if (this.counter / 60 <= 5 && this.counter / 60 > 0.5) {
+    if (this.counterDown / 60 > 0) {
+      this.counterDown--;
+      console.log(this.counterDown / 60);
+      if (this.counterDown / 60 <= 5 && this.counterDown / 60 > 0.5) {
 
         ctx.font = "150px Comic Sans MS";
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
-        ctx.fillText(`${Math.round(this.counter / 60)}`, canvas.width / 2, canvas.height / 2);
+        ctx.fillText(`${Math.round(this.counterDown / 60)}`, canvas.width / 2, canvas.height / 2);
       }
-      if (this.counter / 60 < 0.5) {
+      if (this.counterDown / 60 < 0.5) {
+        audioShotgun.volume = 1;
         audioShotgun.play();
         ctx.font = "150px Comic Sans MS";
         ctx.fillStyle = "white";
@@ -44,6 +46,10 @@ Game.prototype.start = function () {
       }
 
     } else {
+      ctx.font = "80px Comic Sans MS";
+      ctx.fillStyle = "white";
+      ctx.fillText(`${Math.round(this.counterUp / 60)}`,1030,100);
+      this.counterUp++;
       this.setListeners();
     }
 
