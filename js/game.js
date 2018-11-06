@@ -13,7 +13,7 @@ function Game(canvasID) {
 }
 
 Game.prototype.start = function () {
-
+  var audioShotgun = new Audio('./audio/Shotgun-Sound.mp3');
   this.interval = setInterval(function () {
 
 
@@ -24,16 +24,28 @@ Game.prototype.start = function () {
 
     this.draw();
 
-    if (this.counter > 0) {
-      console.log(this.counter / 60);
-      
+    // console.log(this.counter);
+    if (this.counter / 60 > 0) {
       this.counter--;
+      console.log(this.counter / 60);
+      if (this.counter / 60 <= 5 && this.counter / 60 > 0.5) {
+
+        ctx.font = "150px Comic Sans MS";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.fillText(`${Math.round(this.counter / 60)}`, canvas.width / 2, canvas.height / 2);
+      }
+      if (this.counter / 60 < 0.5) {
+        audioShotgun.play();
+        ctx.font = "150px Comic Sans MS";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.fillText(`GO!!!`, canvas.width / 2, canvas.height / 2);
+      }
 
     } else {
       this.setListeners();
     }
-
-
 
   }.bind(this), 1000 / this.fps);
 }

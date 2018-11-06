@@ -19,7 +19,6 @@ window.onload = function () {
       var audioCrowd = new Audio('./audio/Stadium.mp3');
       audioCrowd.play();
       game.start();
-
     }
 
   }.bind(this);
