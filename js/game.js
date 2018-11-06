@@ -4,29 +4,36 @@ function Game(canvasID) {
   this.canvas = document.getElementById(canvasID);
   this.ctx = this.canvas.getContext("2d");
   this.fps = 60;
-  this.bg = new Background(this);
+  this.bg = new Background(this, './img/pistaIronRun.jpg');
+  // this.mainTitle = new Background(this, './img/sports-stadium.jpg');
   this.player1 = new Player(this, './img/MarioSprite.png');
   this.player2 = new Player(this, './img/LuigiSprite.png');
   this.framesCounter = 0;
-  this.counter = 10;
-
+  this.counter = 600;
 }
 
 Game.prototype.start = function () {
 
   this.interval = setInterval(function () {
-    this.counter--
-    // this.clear();  
+
 
     this.framesCounter++;
-
     if (this.framesCounter > 1000) {
       this.framesCounter = 0;
     }
 
     this.draw();
-    // this.move();    
-    this.setListeners();
+
+    if (this.counter > 0) {
+      console.log(this.counter / 60);
+      
+      this.counter--;
+
+    } else {
+      this.setListeners();
+    }
+
+
 
   }.bind(this), 1000 / this.fps);
 }
@@ -39,7 +46,7 @@ Game.prototype.move = function () {
 Game.prototype.draw = function () {
   // var bg = new Background(this);
   this.ctx.beginPath();
-  this.bg.draw();
+  this.bg.drawBG();
 
   this.player2.y = 325;
   this.player2.draw();
@@ -51,11 +58,11 @@ Game.prototype.clear = function () {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }
 
-Game.prototype.audio = function () {
+// Game.prototype.audio = function () {
 
-  var audioCrowd = new Audio('./audio/Stadium.mp3');
-  audioCrowd.play();
-}
+//   var audioCrowd = new Audio('./audio/Stadium.mp3');
+//   audioCrowd.play();
+// }
 
 Game.prototype.setListeners = function () {
   var thrust = 0.25;

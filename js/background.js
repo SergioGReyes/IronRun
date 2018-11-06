@@ -1,10 +1,10 @@
 
-function Background(game) {
+function Background(game, myImg) {
 
   this.game = game;
   this.img = new Image()
   this.img.src = './img/pistaIronRun.jpg';
-  
+
   this.x = 0;
   this.y = 0;
 
@@ -18,10 +18,16 @@ function Background(game) {
   this.bgH = 700;
 }
 
-Background.prototype.draw = function () {
+Background.prototype.drawBG = function () {
 
   this.game.ctx.drawImage(this.img, this.x, this.y, this.bgW, this.bgH);
 }
+
+// Background.prototype.drawMT = function () {
+//   console.log(this.img)
+//   this.game.ctx.drawImage(this.img, this.x, this.y, this.bgW, this.bgH);
+// }
+
 
 Background.prototype.move = function () {
 
