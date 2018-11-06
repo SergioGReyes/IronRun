@@ -46,7 +46,13 @@ Game.prototype.draw = function () {
 
 Game.prototype.clear = function () {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-};
+}
+
+Game.prototype.audio = function(){
+
+  var audioCrowd = new Audio('./audio/Stadium.mp3');
+  audioCrowd.play();
+}
 
 
 Game.prototype.setListeners = function () {
