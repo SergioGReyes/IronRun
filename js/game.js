@@ -23,6 +23,8 @@ function Game(canvasID) {
 }
 
 Game.prototype.start = function () {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   
   var audioShotgun = new Audio('./audio/Shotgun-Sound.mp3');
   var audioCrowd = new Audio('./audio/Stadium.mp3');
@@ -60,7 +62,7 @@ Game.prototype.move = function () {
 Game.prototype.draw = function () {
   this.ctx.beginPath();
   this.bg.drawBG();
-  this.player2.y = 325;
+  this.player2.y = 390;
   this.player2.draw(this.isFinished, './img/LuigiSpriteMeta.png');
   this.player1.draw(this.isFinished, './img/MarioSpriteMeta.png');
   this.ctx.closePath();
@@ -83,7 +85,7 @@ Game.prototype.setListeners = function () {
 
     if (event.keyCode === this.player1.runKey1) { //Entrada jugador 1
       this.player1.animateImg();
-      // console.log(this.player1.x);
+      console.log(this.player1.x);
       if (this.player1.x > 515 || this.player1.x > this.player2.x) {  // Cuando llega a la mitad de la pantalla o esta delante del otro jugador
         this.move();
         // this.player2.x -= 35;
@@ -92,7 +94,7 @@ Game.prototype.setListeners = function () {
 
         if (this.bg.move()) { //si ha llegado al final
 
-          if (this.player1.x > 721 && !this.player2Win) { //línea de meta - ganador
+          if (this.player1.x > 936 && !this.player2Win) { //línea de meta - ganador
             this.stopCounter = true;
             this.player1Win = true;
           }
@@ -100,7 +102,7 @@ Game.prototype.setListeners = function () {
           this.player2.x += 35
           this.isFinished = true;
 
-          if (this.player1.x > 905) { // Cuando cruza la línea de meta para que se pare
+          if (this.player1.x > 1200) { // Cuando cruza la línea de meta para que se pare
 
           } else {
             this.player1.x += 35;
@@ -122,14 +124,14 @@ Game.prototype.setListeners = function () {
 
         if (this.bg.move()) { // si ha llegado al final
 
-          if (this.player2.x > 721 && !this.player1Win) { //línea de meta - ganador
+          if (this.player2.x > 936 && !this.player1Win) { //línea de meta - ganador
             
             this.stopCounter = true;
             this.player2Win = true;
           }
           this.player1.x += 35;
           this.isFinished = true;
-          if (this.player2.x > 905) {
+          if (this.player2.x > 1200) {
 
           } else {
             this.player2.x += 35;

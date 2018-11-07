@@ -1,8 +1,17 @@
 
+
+
+
+
 window.onload = function () {
 
   canvas = document.getElementById('canvasID');
   ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  document.getElementById('mainTheme').play();
+
 
   var img = new Image();
   img.src = './img/MainTitle.jpg'

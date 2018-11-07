@@ -10,7 +10,7 @@ function Player(game, img, name) {
   this.img.frameIndex = 0;
 
   this.x = 170;
-  this.y = 400;
+  this.y = 460;
   this.bgw = 60;
   this.bgh = 120;
 

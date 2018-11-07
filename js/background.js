@@ -15,7 +15,7 @@ function Background(game, myImg) {
   this.thrust = 0.5;
 
   this.bgW = 8000;
-  this.bgH = 700;
+  this.bgH = 800;
 }
 
 Background.prototype.drawBG = function () {
@@ -25,7 +25,7 @@ Background.prototype.drawBG = function () {
 
 Background.prototype.move = function () {
 
-  if (this.x < -6750) { //Se para al final
+  if (this.x < -6500) { //Se para al final
 
     return true;
 
