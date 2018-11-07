@@ -23,12 +23,6 @@ Background.prototype.drawBG = function () {
   this.game.ctx.drawImage(this.img, this.x, this.y, this.bgW, this.bgH);
 }
 
-// Background.prototype.drawMT = function () {
-//   console.log(this.img)
-//   this.game.ctx.drawImage(this.img, this.x, this.y, this.bgW, this.bgH);
-// }
-
-
 Background.prototype.move = function () {
 
   if (this.x < -6750) { //Se para al final
