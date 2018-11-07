@@ -2,9 +2,9 @@
 window.onload = function () {
 
   canvas = document.getElementById('canvasID');
-  ctx = canvas.getContext("2d");
+  ctx = canvas.getContext("2d");  
+  
   var img = new Image();
-  var imgEnter = new Image();
   img.src = './img/MainTitle.jpg'
   
   img.onload = function () {
@@ -16,9 +16,8 @@ window.onload = function () {
     if (event.keyCode === 13) {
       var game = new Game('canvasID');
       var audioCrowd = new Audio('./audio/Stadium.mp3');
-      audioCrowd.play();
+      audioCrowd.play();      
       game.start();
     }
-
   }.bind(this);
 };

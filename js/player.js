@@ -23,9 +23,9 @@ function Player(game, img) {
   this.runKey2 = 190;
 }
 
-Player.prototype.draw = function () {
+Player.prototype.draw = function (isFinished, img) {
 
-  // this.game.ctx.drawImage(this.img, this.x, this.y, this.bgw, this.bgh); 
+  isFinished ? this.img.src = img : this.img;
 
   this.game.ctx.drawImage(
     this.img,
@@ -38,9 +38,9 @@ Player.prototype.draw = function () {
     this.bgw,
     this.bgh
   );
-
-  // this.animateImg();
 }
+
+
 Player.prototype.animateImg = function () {
 
   // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
