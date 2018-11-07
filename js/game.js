@@ -5,8 +5,9 @@ function Game(canvasID) {
   this.ctx = this.canvas.getContext("2d");
   this.fps = 60;
   this.bg = new Background(this, './img/pistaIronRun.jpg');
-  this.player1 = new Player(this, './img/MarioSprite.png');
-  this.player2 = new Player(this, './img/LuigiSprite.png');
+  this.player1 = new Player(this, './img/MarioSprite.png', 'Mario');
+  this.player2 = new Player(this, './img/LuigiSprite.png', 'Luigi');
+  this.txtCanvas = new TextCanvas(this);
 
   this.framesCounter = 0;
   this.counterDown = 600;
@@ -17,10 +18,15 @@ function Game(canvasID) {
 
   this.stopCounter = false;
   this.finalTime = 0;
+  this.player1Win = false;
+  this.player2Win = false;
 }
 
 Game.prototype.start = function () {
+  
   var audioShotgun = new Audio('./audio/Shotgun-Sound.mp3');
+  var audioCrowd = new Audio('./audio/Stadium.mp3');
+
   this.interval = setInterval(function () {
 
     this.framesCounter++;
@@ -28,47 +34,19 @@ Game.prototype.start = function () {
       this.framesCounter = 0;
     }
     this.draw();
-    // console.log(this.counter);
     if (this.counterDown / 60 > 0) {
       this.counterDown--;
-      // console.log(this.counterDown / 60);
-      if (this.counterDown / 60 <= 5 && this.counterDown / 60 > 0.5) { // últimos 5 segundos
-
-        ctx.font = "150px Impact";
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.lineWidth = 3; 
-        ctx.fillText(`${Math.round(this.counterDown / 60)}`, canvas.width / 2, canvas.height / 2);
-        ctx.strokeText(`${Math.round(this.counterDown / 60)}`, canvas.width / 2, canvas.height / 2);
-
+      if (this.counterDown / 60 <= 5 && this.counterDown / 60 > 0.5) { // últimos 5 segundos        
+        this.txtCanvas.txtCountDown();
       }
       if (this.counterDown / 60 < 0.5) {  // Sustituye 0 por GO!!!
         audioShotgun.volume = 1;
         audioShotgun.play();
-        ctx.font = "150px Impact";
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.lineWidth = 3; 
-        ctx.fillText(`GO!!!`, canvas.width / 2, canvas.height / 2);
-        ctx.strokeText(`GO!!!`, canvas.width / 2, canvas.height / 2);
+        audioCrowd.play();
+        this.txtCanvas.txtGo();
       }
-
     } else { // Comienza la carrera
-      ctx.font = "80px Impact";
-      ctx.fillStyle = "white";
-
-      this.sg = Math.floor(this.counterUp / 60);
-      this.msg = ((this.counterUp / 60) - Math.floor(this.counterUp / 60)).toString().substring(2, 4);
-
-      if (this.sg.length === 1) {
-        this.sg = '0' + this.sg;
-      }
-      if (this.msg.length === 1) {
-        this.msg = '0' + this.msg;
-      }
-      document.getElementById('chrono').style.display = "flex";
-      document.getElementById('chrono').innerHTML = `<p>${this.sg}</p> <p>:</p> <p>${this.msg}</p>`
-      !this.stopCounter ? this.counterUp++ : this.counterUp;
+      this.txtCanvas.txtChrono();
       this.setListeners();
     }
 
@@ -93,7 +71,14 @@ Game.prototype.clear = function () {
 }
 
 Game.prototype.setListeners = function () {
-  console.log(this.player1.x);
+  
+  if (this.player1Win){
+    this.txtCanvas.txtWin(this.player1.name);
+  } 
+  if(this.player2Win) {
+    this.txtCanvas.txtWin(this.player2.name);
+  }
+
   document.onkeyup = function (event) {
 
     if (event.keyCode === this.player1.runKey1) { //Entrada jugador 1
@@ -107,13 +92,11 @@ Game.prototype.setListeners = function () {
 
         if (this.bg.move()) { //si ha llegado al final
 
-          if (this.player1.x > 721) { //línea de meta - ganador
-            ctx.font = "150px Comic Sans MS";
-            ctx.fillStyle = "white";
-            ctx.textAlign = "center";
-            ctx.fillText(`Mario Wins!!!`, canvas.width / 2, canvas.height / 2);
+          if (this.player1.x > 721 && !this.player2Win) { //línea de meta - ganador
             this.stopCounter = true;
+            this.player1Win = true;
           }
+
           this.player2.x += 35
           this.isFinished = true;
 
@@ -130,7 +113,7 @@ Game.prototype.setListeners = function () {
 
     if (event.keyCode === this.player2.runKey2) { //Entrada jugador 2
       this.player2.animateImg();
-     
+
       if (this.player2.x > 515 || this.player2.x > this.player1.x) {
         this.move();
         // this.player1.x -= 35;
@@ -139,12 +122,10 @@ Game.prototype.setListeners = function () {
 
         if (this.bg.move()) { // si ha llegado al final
 
-          if (this.player2.x > 721) { //línea de meta - ganador
-            ctx.font = "150px Comic Sans MS";
-            ctx.fillStyle = "white";
-            ctx.textAlign = "center";
-            ctx.fillText(`Luigi Wins!!!`, canvas.width / 2, canvas.height / 2);
+          if (this.player2.x > 721 && !this.player1Win) { //línea de meta - ganador
+            
             this.stopCounter = true;
+            this.player2Win = true;
           }
           this.player1.x += 35;
           this.isFinished = true;

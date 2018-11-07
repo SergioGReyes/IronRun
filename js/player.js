@@ -1,9 +1,10 @@
 
-function Player(game, img) {
+function Player(game, img, name) {
 
   this.game = game;
   this.img = new Image()
   this.img.src = img;
+  this.name = name;
 
   this.img.frames = 3;
   this.img.frameIndex = 0;
