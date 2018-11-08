@@ -1,7 +1,7 @@
 function Game(canvasID) {
   this.canvas = document.getElementById(canvasID);
   this.ctx = this.canvas.getContext("2d");
-  this.fps = 60;
+  this.fps = 60;  
 }
 
 Game.prototype.reset = function () {

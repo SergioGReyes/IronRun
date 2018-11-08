@@ -78,3 +78,16 @@ TextCanvas.prototype.txtReset = function (){
   this.game.ctx.fillText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
   this.game.ctx.strokeText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
 }
+TextCanvas.prototype.txtControls = function (){
+  this.game.ctx.font = "80px Impact";
+  this.game.ctx.fillStyle = "white";
+  this.game.ctx.textAlign = "center";
+  this.game.ctx.lineWidth = 3;
+  this.game.ctx.shadowOffsetX = 1;
+  this.game.ctx.shadowOffsetY = 1;
+  this.game.ctx.shadowColor = "rgba(0,0,0,0.3)";
+  this.game.ctx.shadowBlur = 1;
+  this.game.ctx.fillText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
+  this.game.ctx.strokeText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
+}
+
