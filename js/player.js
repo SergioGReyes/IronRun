@@ -1,5 +1,4 @@
 function Player(game, img, name) {
-
   this.game = game;
   this.img = new Image()
   this.img.src = img;
@@ -24,9 +23,7 @@ function Player(game, img, name) {
 }
 
 Player.prototype.draw = function (isFinished, img) {
-
   isFinished ? this.img.src = img : this.img;
-
   this.game.ctx.drawImage(
     this.img,
     this.img.frameIndex * Math.floor(this.img.width / this.img.frames),
@@ -41,12 +38,8 @@ Player.prototype.draw = function (isFinished, img) {
 }
 
 Player.prototype.animateImg = function () {
-
-  // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
   if (this.game.framesCounter % 1 === 0) {
     this.img.frameIndex += 1;
-
-    // Si el frame es el último, se vuelve al primero
     if (this.img.frameIndex > 2) this.img.frameIndex = 0;
   }
 }

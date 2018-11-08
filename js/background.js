@@ -1,4 +1,4 @@
-function Background(game, myImg) {
+function Background(game) {
 
   this.game = game;
   this.img = new Image()
@@ -18,19 +18,14 @@ function Background(game, myImg) {
 }
 
 Background.prototype.drawBG = function () {
-
   this.game.ctx.drawImage(this.img, this.x, this.y, this.bgW, this.bgH);
 }
 
 Background.prototype.move = function () {
-
   if (this.x < -6500) { //Se para al final
-
     return true;
-
   } else {
     this.speedThrust += this.thrust;
     this.x -= this.speedX + this.speedThrust;
-    // this.x -= 25;
   }
 }

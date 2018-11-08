@@ -36,8 +36,6 @@ TextCanvas.prototype.txtChrono = function () {
   if (this.game.msg.length === 1) {
     this.game.msg = '0' + this.game.msg;
   }
-  // document.getElementById('chrono').style.display = "flex";
-  // document.getElementById('chrono').innerHTML = `<p>${this.game.sg}</p> <p>:</p> <p>${this.game.msg}</p>`
   !this.game.stopCounter ? this.game.counterUp++ : this.game.counterUp;
   
   this.game.ctx.font = "80px Impact";
@@ -54,8 +52,6 @@ TextCanvas.prototype.txtChrono = function () {
   this.game.ctx.strokeText(`${this.game.sg}`, (canvas.width / 1.25)-25, (canvas.height * 0.15) + 10);
   this.game.ctx.strokeText(`:`, (canvas.width / 1.25), (canvas.height * 0.15) + 10);
   this.game.ctx.strokeText(`${this.game.msg}`, (canvas.width / 1.25) + 90, (canvas.height * 0.15) + 10);
-  // this.game.ctx.fillText(`${this.game.sg} : ${this.game.msg}`, canvas.width / 2, (canvas.height / 2) + 10);
-  // this.game.ctx.strokeText(`${this.game.sg} : ${this.game.msg}`, canvas.width / 2, (canvas.height / 2) + 10);
 }
 
 TextCanvas.prototype.txtWin = function (name) {
@@ -72,7 +68,6 @@ TextCanvas.prototype.txtWin = function (name) {
 }
 
 TextCanvas.prototype.txtReset = function (){
-
   this.game.ctx.font = "80px Impact";
   this.game.ctx.fillStyle = "white";
   this.game.ctx.textAlign = "center";
@@ -83,5 +78,4 @@ TextCanvas.prototype.txtReset = function (){
   this.game.ctx.shadowBlur = 1;
   this.game.ctx.fillText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
   this.game.ctx.strokeText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
-
 }
