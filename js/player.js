@@ -1,4 +1,3 @@
-
 function Player(game, img, name) {
 
   this.game = game;
@@ -10,7 +9,7 @@ function Player(game, img, name) {
   this.img.frameIndex = 0;
 
   this.x = 170;
-  this.y = 460;
+  this.y = 425;
   this.bgw = 60;
   this.bgh = 120;
 
@@ -40,7 +39,6 @@ Player.prototype.draw = function (isFinished, img) {
     this.bgh
   );
 }
-
 
 Player.prototype.animateImg = function () {
 

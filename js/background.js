@@ -1,4 +1,3 @@
-
 function Background(game, myImg) {
 
   this.game = game;
@@ -15,7 +14,7 @@ function Background(game, myImg) {
   this.thrust = 0.5;
 
   this.bgW = 8000;
-  this.bgH = 800;
+  this.bgH = 750;
 }
 
 Background.prototype.drawBG = function () {
@@ -34,5 +33,4 @@ Background.prototype.move = function () {
     this.x -= this.speedX + this.speedThrust;
     // this.x -= 25;
   }
-
 }
