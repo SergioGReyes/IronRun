@@ -10,8 +10,8 @@ function Background(game) {
   this.speedX = 0;
   this.speedY = 0;
 
-  this.speedThrust = 1;
-  this.thrust = 0.5;
+  this.speedThrust = 0.5;
+  this.thrust = 0.20;
 
   this.bgW = 8000;
   this.bgH = 750;

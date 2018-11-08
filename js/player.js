@@ -20,6 +20,8 @@ function Player(game, img, name) {
 
   this.runKey1 = 188;
   this.runKey2 = 190;
+  this.runKey3 = 90;
+  this.runKey4 = 88;
 }
 
 Player.prototype.draw = function (isFinished, img) {

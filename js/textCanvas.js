@@ -16,7 +16,6 @@ TextCanvas.prototype.txtCountDown = function () {
 }
 TextCanvas.prototype.txtGo = function () {
   this.game.ctx.font = "150px Impact";
-  this.game.ctx.font = "150px Impact";
   this.game.ctx.fillStyle = "white";
   this.game.ctx.textAlign = "center";
   this.game.ctx.lineWidth = 4;

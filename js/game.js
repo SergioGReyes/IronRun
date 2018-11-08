@@ -8,19 +8,21 @@ Game.prototype.reset = function () {
   this.bg = new Background(this);
   this.player1 = new Player(this, './img/MarioSprite.png', 'Mario');
   this.player2 = new Player(this, './img/LuigiSprite.png', 'Luigi');
+  this.player3 = new Player(this, './img/WarioSprite.png', 'Wario');
+  this.player4 = new Player(this, './img/Luigi2Sprite.png', 'Giorgio');
   this.txtCanvas = new TextCanvas(this);
-  
   this.framesCounter = 0;
   this.counterDown = 600;
   this.counterUp = 0;
   this.sg = '';
   this.msg = '';
   this.isFinished = false;
-
   this.stopCounter = false;
   this.finalTime = 0;
   this.player1Win = false;
   this.player2Win = false;
+  this.player3Win = false;
+  this.player4Win = false;
   this.allFinished = false;
 }
 
@@ -63,8 +65,12 @@ Game.prototype.draw = function () {
   this.ctx.beginPath();
   this.bg.drawBG();
   this.player2.y = 355;
+  this.player3.y = 490;
+  this.player4.y = 280;
+  this.player4.draw(this.isFinished, './img/Luigi2SpriteMeta.png');
   this.player2.draw(this.isFinished, './img/LuigiSpriteMeta.png');
   this.player1.draw(this.isFinished, './img/MarioSpriteMeta.png');
+  this.player3.draw(this.isFinished, './img/WarioSpriteMeta.png');
   this.ctx.closePath();
 }
 
@@ -80,6 +86,12 @@ Game.prototype.setListeners = function () {
   if (this.player2Win) {
     this.txtCanvas.txtWin(this.player2.name);
   }
+  if (this.player3Win) {
+    this.txtCanvas.txtWin(this.player3.name);
+  }
+  if (this.player4Win) {
+    this.txtCanvas.txtWin(this.player4.name);
+  }
 
   document.onkeyup = function (event) {
     if (this.allFinished) {
@@ -88,60 +100,144 @@ Game.prototype.setListeners = function () {
       }
     }
     if (event.keyCode === this.player1.runKey1) { //Entrada jugador 1
-      this.player1.animateImg();
-      if (this.player1.x > 515 || this.player1.x > this.player2.x) {  // Cuando llega a la mitad de la pantalla o esta delante del otro jugador
-        this.move();
-        this.player2.speedThrust += this.player2.thrust;
-        this.player2.x -= this.player2.speedX + this.player2.speedThrust;
+      this.player1.animateImg();      
         if (this.bg.move()) { //si ha llegado al final
-          if (this.player1.x > 936 && !this.player2Win) { //línea de meta - ganador
+          if (this.player1.x > 936 && !this.player2Win && !this.player3Win && !this.player4Win) { //línea de meta - ganador
             this.stopCounter = true;
             this.player1Win = true;
-          } else if (this.player1.x > 936 && this.player2.x > 936) {
+          } else if (this.player1.x > 936 && this.player2.x > 936 && this.player3.x > 936 && this.player4.x > 936) {
             audioWin.play();
             clearInterval(this.interval);
             this.txtCanvas.txtReset();
             this.allFinished = true;
           }
-          this.player2.x += 35
           this.isFinished = true;
-          if (this.player1.x > 1200) { // Cuando cruza la línea de meta para que se pare
+          if (this.player1.x > 1100) { // Cuando cruza la línea de meta para que se pare
           } else {
             this.player1.x += 35;
           }
-        }
+        }else if (this.player1.x > 515 || this.player1.x > this.player2.x && this.player1.x > this.player3.x &&
+          this.player1.x > this.player4.x) {  // Cuando llega a la mitad de la pantalla o esta delante del otro jugador
+          this.move();
+          this.player2.speedThrust += this.player2.thrust;
+          this.player2.x -= this.player2.speedX + this.player2.speedThrust;
+          this.player3.speedThrust += this.player3.thrust;
+          this.player3.x -= this.player3.speedX + this.player3.speedThrust;
+          this.player4.speedThrust += this.player4.thrust;
+          this.player4.x -= this.player4.speedX + this.player4.speedThrust;        
       } else { // al empezar o ir el último
         this.player1.x += 35;
       }
     }
 
     if (event.keyCode === this.player2.runKey2) { //Entrada jugador 2
-      this.player2.animateImg();
-
-      if (this.player2.x > 515 || this.player2.x > this.player1.x) {
-        this.move();
-        this.player1.speedThrust += this.player1.thrust;
-        this.player1.x -= this.player1.speedX + this.player1.speedThrust;
+      this.player2.animateImg();      
         if (this.bg.move()) { // si ha llegado al final
-          if (this.player2.x > 936 && !this.player1Win) { //línea de meta - ganador
+          if (this.player2.x > 936 && !this.player1Win && !this.player3Win && !this.player4Win) { //línea de meta - ganador
             this.stopCounter = true;
             this.player2Win = true;
-          } else if (this.player1.x > 936 && this.player2.x > 936) {
+          } else if (this.player1.x > 936 && this.player2.x > 936 && this.player3.x > 936 && this.player4.x > 936) {
+            audioWin.play();
+            clearInterval(this.interval);
+            this.txtCanvas.txtReset();
+            this.allFinished = true;
+          }          
+          this.isFinished = true;
+          if (this.player2.x > 1100) {  // Cuando cruza la línea de meta para que se pare
+          } else {
+            this.player2.x += 35;
+          }
+        } else if (this.player2.x > 515 || this.player2.x > this.player1.x && this.player2.x > this.player3.x &&
+          this.player2.x > this.player4.x) {  // Cuando llega a la mitad de la pantalla o esta delante del otro jugador
+          this.move();
+          this.player1.speedThrust += this.player1.thrust;
+          this.player1.x -= this.player1.speedX + this.player1.speedThrust;
+          this.player3.speedThrust += this.player3.thrust;
+          this.player3.x -= this.player3.speedX + this.player3.speedThrust;
+          this.player4.speedThrust += this.player4.thrust;
+          this.player4.x -= this.player4.speedX + this.player4.speedThrust;
+      } else {  // al empezar o ir el último
+        this.player2.x += 35
+      }
+    }
+
+    if (event.keyCode === this.player3.runKey3) { //Entrada jugador 3
+      this.player3.animateImg();      
+        if (this.bg.move()) { // si ha llegado al final
+          if (this.player3.x > 936 && !this.player1Win && !this.player2Win && !this.player4Win) { //línea de meta - ganador
+            this.stopCounter = true;
+            this.player3Win = true;
+          } else if (this.player1.x > 936 && this.player2.x > 936 && this.player3.x > 936 && this.player4.x > 936) {
             audioWin.play();
             clearInterval(this.interval);
             this.txtCanvas.txtReset();
             this.allFinished = true;
           }
-          this.player1.x += 35;
           this.isFinished = true;
-          if (this.player2.x > 1200) {
+          if (this.player3.x > 1100) {  // Cuando cruza la línea de meta para que se pare
           } else {
-            this.player2.x += 35;
+            this.player3.x += 35;
           }
-        }
-      } else {
-        this.player2.x += 35
+        }else if (this.player3.x > 515 || this.player3.x > this.player1.x && this.player3.x > this.player2.x &&
+          this.player3.x > this.player4.x) {  // Cuando llega a la mitad de la pantalla o esta delante del otro jugador
+          this.move();
+          this.player1.speedThrust += this.player1.thrust;
+          this.player1.x -= this.player1.speedX + this.player1.speedThrust;
+          this.player2.speedThrust += this.player2.thrust;
+          this.player2.x -= this.player2.speedX + this.player2.speedThrust;
+          this.player4.speedThrust += this.player4.thrust;
+          this.player4.x -= this.player4.speedX + this.player4.speedThrust;
+      } else {  // al empezar o ir el último
+        this.player3.x += 35
       }
     }
+
+    if (event.keyCode === this.player4.runKey4) { //Entrada jugador 4
+      this.player4.animateImg();      
+        if (this.bg.move()) { // si ha llegado al final
+          if (this.player4.x > 936 && !this.player1Win && !this.player2Win && !this.player3Win) { //línea de meta - ganador
+            this.stopCounter = true;
+            this.player4Win = true;
+          } else if (this.player1.x > 936 && this.player2.x > 936 && this.player3.x > 936 && this.player4.x > 936) {
+            audioWin.play();
+            clearInterval(this.interval);
+            this.txtCanvas.txtReset();
+            this.allFinished = true;
+          }
+          this.isFinished = true;
+          if (this.player4.x > 1100) {  // Cuando cruza la línea de meta para que se pare
+          } else {
+            this.player4.x += 35;
+          }
+        }else if (this.player4.x > 515 || this.player4.x > this.player1.x && this.player4.x > this.player2.x &&
+          this.player4.x > this.player3.x) {  // Cuando llega a la mitad de la pantalla o esta delante del otro jugador
+          this.move();
+          this.player1.speedThrust += this.player1.thrust;
+          this.player1.x -= this.player1.speedX + this.player1.speedThrust;
+          this.player2.speedThrust += this.player2.thrust;
+          this.player2.x -= this.player2.speedX + this.player2.speedThrust;
+          this.player3.speedThrust += this.player3.thrust;
+          this.player3.x -= this.player3.speedX + this.player3.speedThrust;
+      } else {  // al empezar o ir el último
+        this.player4.x += 35
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }.bind(this);
 };
