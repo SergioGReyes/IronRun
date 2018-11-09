@@ -79,15 +79,31 @@ TextCanvas.prototype.txtReset = function (){
   this.game.ctx.strokeText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
 }
 TextCanvas.prototype.txtControls = function (){
-  this.game.ctx.font = "80px Impact";
-  this.game.ctx.fillStyle = "white";
-  this.game.ctx.textAlign = "center";
-  this.game.ctx.lineWidth = 3;
+  this.game.ctx.font = "50px Impact";
+  
+  this.game.ctx.textAlign = "left";
+  this.game.ctx.lineWidth = 2;
   this.game.ctx.shadowOffsetX = 1;
   this.game.ctx.shadowOffsetY = 1;
   this.game.ctx.shadowColor = "rgba(0,0,0,0.3)";
   this.game.ctx.shadowBlur = 1;
-  this.game.ctx.fillText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
-  this.game.ctx.strokeText(`Esc: Menu`, canvas.width / 2, (canvas.height / 2) + 200);
+  this.game.ctx.fillStyle = "#A59B9A";
+  ctx.globalAlpha = 0.2;
+  this.game.ctx.fillRect(40,270, 220, 220);
+  this.game.ctx.strokeRect(40,270, 220, 220);
+  this.game.ctx.fillStyle = "white";
+  ctx.globalAlpha = 1;
+  this.game.ctx.strokeText(`Mario: ,`, canvas.width / 22, (canvas.height / 2)- 50);
+  this.game.ctx.fillText(`Mario: ,`, canvas.width / 22, (canvas.height / 2) - 50);
+  this.game.ctx.strokeText(`Mario: ,`, canvas.width / 22, (canvas.height / 2)- 50);
+
+  this.game.ctx.fillText(`Luigi: .`, canvas.width / 22, (canvas.height / 2));
+  this.game.ctx.strokeText(`Luigi: .`, canvas.width / 22, (canvas.height / 2));
+
+  this.game.ctx.fillText(`Wario: z`, canvas.width / 22, (canvas.height / 2) + 50);
+  this.game.ctx.strokeText(`Wario: z`, canvas.width / 22, (canvas.height / 2) + 50);
+
+  this.game.ctx.fillText(`Giorgio: x`, canvas.width / 22, (canvas.height / 2) + 100);
+  this.game.ctx.strokeText(`Giorgio: x`, canvas.width / 22, (canvas.height / 2) + 100);
 }
 

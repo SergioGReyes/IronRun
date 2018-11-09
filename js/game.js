@@ -2,9 +2,6 @@ function Game(canvasID) {
   this.canvas = document.getElementById(canvasID);
   this.ctx = this.canvas.getContext("2d");
   this.fps = 60;  
-}
-
-Game.prototype.reset = function () {
   this.bg = new Background(this);
   this.player1 = new Player(this, './img/MarioSprite.png', 'Mario');
   this.player2 = new Player(this, './img/LuigiSprite.png', 'Luigi');
@@ -27,7 +24,6 @@ Game.prototype.reset = function () {
 }
 
 Game.prototype.start = function () {
-  this.reset();
   var audioShotgun = new Audio('./audio/Shotgun-Sound.mp3');
   var audioCrowd = new Audio('./audio/Stadium.mp3');
   var audioCounter = new Audio('./audio/counterSound3.mp3');
@@ -222,22 +218,5 @@ Game.prototype.setListeners = function () {
         this.player4.x += 35
       }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }.bind(this);
 };
