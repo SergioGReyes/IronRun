@@ -1,3 +1,6 @@
+
+![alt text](https://github.com/SergioGReyes/IronRun/blob/master/img/logo-ironhack-blue.png)
+
 # IronRun
 
 Proyecto tercera semana de Ironhack.
