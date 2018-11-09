@@ -9,7 +9,13 @@ La mecánica del juego es sencilla: hay que pulsar repetidamente el botón del p
 Lo más difícil de implementar en JS ha sido el comportamiento de los personajes en relación a la imagen de la pista de atletismo y a sí mismos. Hubo que establecer distintas condiciones que determinaran quién desplaza el background y quien empuja hacia atrás a los restantes adversarios, para poder simular la sensación de desplazamiento y de dejar atrás a los contrincantes.
 
 
+El código siguiente muestra el comportanmiento para el jugador 1:
+
 ![alt text](https://github.com/SergioGReyes/IronRun/blob/master/img/codeCapture.png)
+
+Si empezase el proyecto de nuevo, trataría de implementar el código anterior para que esté más factorizado en relación al código que controla los jugadores, ya que este código, prácticamente se repite para los otros tres jugadores.
+
+Las mejoras que le añadiría serían más modos de juego, como salto de longitud por turnos o los 110 metros vallas. 
 
 
 
