@@ -3,6 +3,8 @@
 
 # IronRun
 
+![alt text](https://github.com/SergioGReyes/IronRun/blob/master/img/ironrunCapture.png)
+
 Proyecto tercera semana de Ironhack.
 
 Videojuego desarrollado en JavaScript. Inspirado directamente en el juego de 1983 de Konami, Track & Field. La banda sonora es de Sonic the Hedgehog, los personajes principales del universo de Mario Bros., y los efectos sonoros de Street Fighter 2.
