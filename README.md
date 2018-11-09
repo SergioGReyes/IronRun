@@ -1,7 +1,7 @@
 
 ![alt text](https://github.com/SergioGReyes/IronRun/blob/master/img/logo-ironhack-blue.png)
 
-# IronRun
+# <h1>IronRun</h1>
 
 ![alt text](https://github.com/SergioGReyes/IronRun/blob/master/img/ironrunCapture.png)
 
