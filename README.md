@@ -5,8 +5,7 @@ Proyecto tercera semana de Ironhack.
 Videojuego desarrollado en JavaScript. Inspirado directamente en el juego de 1983 de Konami, Track & Field. La banda sonora es de Sonic the Hedgehog, los personajes principales del universo de Mario Bros., y los efectos sonoros de Street Fighter 2.
 
 -------------------------------------------------------------------
-
-`
+``
 
 if (event.keyCode === this.player1.runKey1) { //Entrada jugador 1
       this.player1.animateImg();
@@ -39,5 +38,5 @@ if (event.keyCode === this.player1.runKey1) { //Entrada jugador 1
       }
     }
     
- `
+ 
  
